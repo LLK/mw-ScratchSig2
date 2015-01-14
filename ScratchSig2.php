@@ -44,7 +44,7 @@ function sigParserInit (Parser $parser) {
 
 function sigFetchProfile ($username) {
     // Fetch page
-    $data = file_get_contents("http://scratch.mit.edu/site-api/users/all/$username/");
+    $data = file_get_contents('http://scratch.mit.edu/site-api/users/all/' . str_replace(' ', '_', $username) . '/');
     $json = json_decode($data, $assoc=true);
     $pk = $json['user']['pk'];
     $image_url = "http://cdn.scratch.mit.edu/get_image/user/{$pk}_18x18.png";
@@ -82,7 +82,7 @@ function sigRenderTag ($input, array $args, Parser $parser, PPFrame $frame) {
         . '</a>'
         . ' '
         . '('
-        . '<a href="/wiki/User_Talk:'.$username.'">talk</a>'
+        . '<a href="/wiki/User_talk:'.$username.'">talk</a>'
         . ' | '
         . '<a href="/wiki/Special:Contributions/'.$username.'">contribs</a>'
         . ')'
@@ -106,6 +106,6 @@ $wgResourceModules['ext.scratchSig'] = array(
     'styles' => 'scratchsig.css',
 
     'localBasePath' => __DIR__,
-    'remoteExtPath' => 'ScratchSig2'
+    'remoteExtPath' => 'mw-ScratchSig2'
 );
 
